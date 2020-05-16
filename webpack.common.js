@@ -6,7 +6,7 @@ const {StylableWebpackPlugin} = require("@stylable/webpack-plugin");
 module.exports = {
     entry: "./src/index.tsx",
     output: {
-        filename: "bundle.js",
+        filename: "bundle.[chunkhash].js",
         path: Path.resolve(__dirname, "dist"),
         publicPath: "/",
     },

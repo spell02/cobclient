@@ -1,0 +1,6 @@
+# Do not include node_modules or webpack build artifacts
+dist
+node_modules
+
+# Do not commit VSCode settings
+.vscode/settings.json

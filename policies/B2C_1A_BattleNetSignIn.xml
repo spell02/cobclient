@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="callofblood.onmicrosoft.com" PolicyId="B2C_1A_BattleNetSignIn" PublicPolicyUri="http://callofblood.onmicrosoft.com/B2C_1A_BattleNetSignIn">
+    <BuildingBlocks>
+        <ClaimsSchema>
+            <ClaimType Id="objectId">
+                <DataType>string</DataType>
+            </ClaimType>
+            <ClaimType Id="name"> 
+                <DataType>string</DataType>
+            </ClaimType>
+        </ClaimsSchema>
+    </BuildingBlocks>
+    <ClaimsProviders>
+        <ClaimsProvider>
+            <DisplayName>Trust Framework Policy Engine Default Profiles</DisplayName>
+            <TechnicalProfiles>
+                <TechnicalProfile Id="TpEngine_c3bd4fe2-1775-4013-b91d-35f16d377d13">
+                    <DisplayName>Trust Framework Policy Engine Default Profile</DisplayName>
+                    <Protocol Name="None" />
+                    <Metadata>
+                        <Item Key="url">{service:te}</Item>
+                    </Metadata>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider>
+            <DisplayName>Token Issuer Technical Profiles</DisplayName>
+            <TechnicalProfiles>
+                <TechnicalProfile Id="JwtIssuer">
+                    <DisplayName>JWT Issuer Technical Profile</DisplayName>
+                    <Protocol Name="None" />
+                    <OutputTokenFormat>JWT</OutputTokenFormat>
+                    <Metadata>
+                        <Item Key="client_id">{service:te}</Item>
+                        <Item Key="issuer_refresh_token_user_identity_claim_type">objectId</Item>
+                        <Item Key="SendTokenResponseBodyWithJsonNumbers">true</Item>
+                    </Metadata>
+                    <CryptographicKeys>
+                        <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+                        <Key Id="issuer_refresh_token_key" StorageReferenceId="B2C_1A_TokenEncryptionKeyContainer" />
+                    </CryptographicKeys>
+                    <InputClaims />
+                    <OutputClaims />
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider>
+            <DisplayName>Azure Active Directory Technical Profiles</DisplayName>
+            <TechnicalProfiles>
+                <TechnicalProfile Id="AAD-Common"> 
+                    <DisplayName>Azure Active Directory Common Technical Profile</DisplayName>
+                    <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureActiveDirectoryProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /> 
+                    <CryptographicKeys> 
+                        <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />  
+                    </CryptographicKeys>
+                    <IncludeInSso>false</IncludeInSso>
+                </TechnicalProfile>
+                <TechnicalProfile Id="AAD-UserWriteUsingAlternativeSecurityId">
+                    <Metadata> 
+                        <Item Key="Operation">Write</Item>
+                    </Metadata>
+                    <InputClaims> 
+                        <InputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="userPrincipalName" />  
+                        <InputClaim ClaimTypeReferenceId="name" PartnerClaimType="displayName" />
+                    </InputClaims>
+                    <PersistedClaims>
+                        <PersistedClaim ClaimTypeReferenceId="alternativeSecurityId" DefaultValue="battlenet" />
+                        <PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
+                        <PersistedClaim ClaimTypeReferenceId="mailNickName" DefaultValue="unknown" />
+                        <PersistedClaim ClaimTypeReferenceId="displayName" /> 
+                    </PersistedClaims>
+                    <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider> 
+            <Domain>eu.battle.net</Domain>
+            <DisplayName>Battle.net Technical Profiles</DisplayName>
+            <TechnicalProfiles> 
+                <TechnicalProfile Id="Battlenet-OAUTH"> 
+                    <DisplayName>Battle.net Account</DisplayName> 
+                    <Protocol Name="OAuth2" /> 
+                    <Metadata>
+                        <Item Key="ProviderName">Blizzard Battle.net</Item>
+                        <Item Key="client_id">d83146271afa4cdcbe3b8f4433aaff88</Item>
+                        <Item Key="authorization_endpoint">https://eu.battle.net/oauth/authorize</Item>
+                        <Item Key="AccessTokenEndpoint">https://eu.battle.net/oauth/token</Item>
+                        <Item Key="ClaimsEndpoint">https://eu.battle.net/oauth/userinfo</Item>
+                        <Item Key="scope">openid wow.profile</Item> 
+                        <Item Key="HttpBinding">POST</Item>
+                        <Item Key="UsePolicyInRedirectUri">false</Item>
+                    </Metadata>
+                    <CryptographicKeys> 
+                        <Key Id="client_secret" StorageReferenceId="B2C_1A_BattlenetSecretKeyContainer" />
+                    </CryptographicKeys>
+                    <OutputClaims> 
+                        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" /> 
+                        <OutputClaim ClaimTypeReferenceId="name" PartnerClaimType="battletag" /> 
+                    </OutputClaims>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+    </ClaimsProviders>
+    <UserJourneys>
+        <UserJourney Id="BattlenetSignIn">
+            <OrchestrationSteps>
+                <OrchestrationStep Order="1" Type="ClaimsExchange">
+                    <ClaimsExchanges> 
+                        <ClaimsExchange Id="BattlenetExchange" TechnicalProfileReferenceId="Battlenet-OAUTH" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+                <OrchestrationStep Order="2" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+            </OrchestrationSteps>
+        </UserJourney>
+    </UserJourneys>
+    <RelyingParty>
+        <DefaultUserJourney ReferenceId="BattlenetSignIn" />
+        <TechnicalProfile Id="BattlenetSignInPolicyProfile">
+            <DisplayName>Battle.net Sign In Policy Profile</DisplayName>
+            <Protocol Name="OpenIdConnect" />
+            <OutputClaims>
+                <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+                <OutputClaim ClaimTypeReferenceId="name" />
+            </OutputClaims>
+            <SubjectNamingInfo ClaimType="sub" />
+        </TechnicalProfile>
+    </RelyingParty>
+</TrustFrameworkPolicy>

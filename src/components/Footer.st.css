@@ -1,0 +1,15 @@
+.root {
+    width: 70vw;
+}
+
+.social {
+    list-style-type: none;
+}
+
+.header {
+    font-family: "Lora";
+}
+
+.iconLabel {
+    padding-left: 0.25em;
+}

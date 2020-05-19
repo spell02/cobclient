@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;1,300;1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,700&family=Lora:wght@600&display=swap');
 
 body {
-    font-family: "Jost", sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 16pt;
-    background-color: gainsboro;
+    min-height: 100vh;
+    background-color: #0c1021;
+    color: #f0f0f0;
 }
 
 em, i {
@@ -13,7 +14,7 @@ em, i {
 }
 
 strong, b, b i {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 a {

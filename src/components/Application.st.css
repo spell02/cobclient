@@ -1,5 +1,23 @@
 .root {
+    min-height: 100vh;
     display: grid;
     grid-template-columns: minmax(0, 10vw) 1fr minmax(0, 10vw);
-    grid-template-areas: "nav nav nav";
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "nav nav nav" ". content ." "footer footer footer";
+}
+
+.content {
+    grid-area: content;
+}
+
+.footer {
+    border-top: 3px solid #242837;
+    grid-area: footer;
+    min-height: 300px;
+    background-image: url("./footer_background.jpg");
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
 }

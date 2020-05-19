@@ -22,3 +22,33 @@
 .btnSignIn svg {
     padding-right: 5px;
 }
+
+.message {
+    font-size: 0.8em;
+    text-align: right;
+}
+
+.username {
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    justify-content: right;
+
+    color: #2FC6FF;
+}
+
+.action {
+    cursor: pointer;
+    margin-left: 1em;
+    margin-top: 3px;
+}
+
+.action:hover {
+    filter: brightness(150%);
+}
+
+.iconLabel {
+    padding-left: 0.2em;
+}

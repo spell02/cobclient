@@ -1,6 +1,5 @@
 .root {
     grid-area: nav;
-    background-color: #2A2A2A;
     height: 5rem;
 
     display: flex;

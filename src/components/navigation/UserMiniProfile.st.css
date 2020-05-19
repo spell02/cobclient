@@ -1,0 +1,24 @@
+.root {
+    color: white;
+    padding: 1em;
+}
+
+.btnSignIn {
+    background-color: #006fb2;
+    border: 1px solid #00aeff;
+    color: #fff;
+    padding: 0.5em;
+    font-size: 0.8em;
+
+    display: flex;
+    align-items: center;
+}
+
+.btnSignIn:hover {
+    filter: brightness(120%);
+    transition: 200ms;
+}
+
+.btnSignIn svg {
+    padding-right: 5px;
+}

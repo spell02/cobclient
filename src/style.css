@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,600;1,300;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+
+body {
+    font-family: "Jost", sans-serif;
+    font-size: 16pt;
+    background-color: gainsboro;
+}
+
+em, i {
+    font-weight: 300;
+    font-style: italic;
+}
+
+strong, b, b i {
+    font-weight: 600;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}

@@ -15,4 +15,4 @@ auth.handleRedirectCallback((error, response) => {
     if (error) {
         console.log(error);
     }
-})
+});

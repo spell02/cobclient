@@ -1,17 +1,15 @@
 import * as React from "react";
-import * as MSAL from "msal";
+import { style, classes } from "./Application.st.css";
 
-import {auth} from "../auth";
+import { Navigation } from "./Navigation";
+import { BrowserRouter } from "react-router-dom";
 
 export const Application = () => {
-    const [user, setUser] = React.useState<MSAL.Account | null>(auth.getAccount());
-
     return (
-        <div>
-            {user && <p>Hello, {user.name}!</p>}
-            {user 
-                ? <button onClick={() => auth.logout()}>Log out</button>
-                : <button onClick={() => auth.loginRedirect()}>Log in</button>}
-        </div>
+        <BrowserRouter>
+            <div className={style(classes.root)}>
+                <Navigation />
+            </div>
+        </BrowserRouter>
     );
 };

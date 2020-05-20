@@ -1,0 +1,70 @@
+.root {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #b30000;
+
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 3fr;
+    grid-template-rows: 2fr 7.1fr 12fr 2fr;
+
+    grid-template-areas: ". nav nav ." "map map logo logo" "map map desc desc" ". bottom bottom .";
+}
+
+.left {
+    grid-area: map;
+    background-image: url("./cover_background.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: center;
+    background-size: contain;
+}
+
+.logo {
+    font-family: "Lora";
+    grid-area: logo;
+    display: flex;
+    align-items:flex-end;
+}
+
+.logoText {
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0.1em;
+    text-transform: uppercase;
+}
+
+.desc { 
+    grid-area: desc;
+    max-width: 500px;
+}
+
+.descText {
+    font-size: 1.2em;
+    padding: 0;
+    margin: 0;
+    margin-top: 0.3em;
+}
+
+.ctaButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ctaButton {
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 0.4em;
+    background: none;
+    color: white;
+    margin: 2em 0 2em 0;
+    padding: 0.8em 1.5em 0.8em 1.5em;
+    font-weight: 700;
+}
+
+.ctaButton:hover {
+    color: #b30000;;
+    background-color: white;
+}

@@ -16,14 +16,12 @@ export const Application = () => {
                 </Route>
                 <Route>
                     <div className={style(classes.root)}>
-                        
                         <div className={style(classes.header)}>
                             <Navigation />
                         </div>
                         <div className={style(classes.content)}>
                             <News />
                         </div>
-
                         <div className={style(classes.footer)}>
                             <Footer />
                         </div>

@@ -1,0 +1,50 @@
+.root {
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
+
+    background-image: url("./news_placeholder.jpg");
+    background-position: center;
+    background-size: cover;
+
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas: "." "meta";
+
+    margin: 1em;
+    transition: 100ms;
+    cursor: pointer;
+
+    border: 1px solid #600000;
+}
+
+.root:hover {
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.6);
+    filter: brightness(110%);
+    transition: 100ms;
+}
+
+.meta {
+    display: flex;
+    grid-area: meta;
+    background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(80,0,0,0) 100%);
+    justify-content: space-between;
+    align-items: center;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+.metaBox {
+    padding: 0.6em;
+}
+
+.newsTitle {
+    padding: 0;
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.newsAuthor {
+    font-size: 0.8em;;
+}
+
+.commentCount {
+    padding: 0.3em;
+}

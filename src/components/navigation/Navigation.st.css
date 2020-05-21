@@ -1,7 +1,6 @@
 .root {
     grid-area: nav;
     height: 5rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 100%);
 
     display: flex;
     align-items: center;
